@@ -2,6 +2,7 @@
 
 This model uses a learning-to-rank machine learning framework to quantify molecular complexity in a supervised way. Based on Shapley value analysis, authors were able to identify molecular characteristics that guide experts in assigning molecular complexity, such as molecular weight or number of aromatic cycles. The model was developed using a dataset of ca. 300k data points across diverse structures, and it was applied to study trends in synthetic strategies, among other analyses.
 
+This model was incorporated on 2026-01-30.
 
 
 ## Information
@@ -34,8 +35,11 @@ Below are the **Output Columns** of the model:
 ### Source and Deployment
 - **Source:** `Local`
 - **Source Type:** `External`
+- **S3 Storage**: [https://ersilia-models-zipped.s3.eu-central-1.amazonaws.com/eos96f4.zip](https://ersilia-models-zipped.s3.eu-central-1.amazonaws.com/eos96f4.zip)
 
 ### Resource Consumption
+- **Model Size (Mb):** `1021`
+- **Environment Size (Mb):** `1362`
 
 
 ### References
