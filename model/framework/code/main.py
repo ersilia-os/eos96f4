@@ -1,39 +1,50 @@
-# imports
+import sys
 import os
 import csv
-import sys
-from rdkit import Chem
-from rdkit.Chem.Descriptors import MolWt
+import pickle
 
-# parse arguments
-input_file = sys.argv[1]
-output_file = sys.argv[2]
+input_file = os.path.abspath(sys.argv[1])
+output_file = os.path.abspath(sys.argv[2])
 
-# current file directory
-root = os.path.dirname(os.path.abspath(__file__))
+cwd = os.getcwd()
 
-# my model
-def my_model(smiles_list):
-    return [MolWt(Chem.MolFromSmiles(smi)) for smi in smiles_list]
+root = os.path.abspath(os.path.dirname(__file__))
+sys.path.append(root)
+os.chdir(root)
 
+from mc.analyzers import Predictor
 
-# read SMILES from .csv file, assuming one column with header
+checkpoints_dir = os.path.join(root, "..", "..", "checkpoints")
+
 with open(input_file, "r") as f:
     reader = csv.reader(f)
-    next(reader)  # skip header
-    smiles_list = [r[0] for r in reader]
+    next(reader)
+    smiles_list = [row[0] for row in reader]
 
-# run model
-outputs = my_model(smiles_list)
 
-#check input and output have the same lenght
-input_len = len(smiles_list)
-output_len = len(outputs)
-assert input_len == output_len
+def load_file(path: str):
+    path = os.path.abspath(path)
+    print(f"Loading file from {path}")
+    with open(path, "rb") as f:
+        data = pickle.load(f)
+    return data
 
-# write output in a .csv file
+
+def get_predictor() -> Predictor:
+    dump = load_file(os.path.join(checkpoints_dir, "model.pkl"))[(0.7, 0.1, 0.2)]
+    print(dump.keys())
+    ranker = dump["ranker"]
+    scaler = dump["scaler"]
+    return Predictor(ranker, scaler)
+
+
+predictor = get_predictor()
+mc_list = predictor.predict(smiles_list)
+
 with open(output_file, "w") as f:
     writer = csv.writer(f)
-    writer.writerow(["value"])  # header
-    for o in outputs:
-        writer.writerow([o])
+    writer.writerow(["molecular_complexity"])
+    for mc in mc_list:
+        writer.writerow([mc])
+
+os.chdir(cwd)
