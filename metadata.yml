@@ -1,6 +1,6 @@
 Identifier: eos96f4
 Slug: digitization-complexity
-Status: In progress
+Status: Ready
 Title: Digitization of molecular complexity
 Description: This model uses a learning-to-rank machine learning framework to 
   quantify molecular complexity in a supervised way. Based on Shapley value 
@@ -36,6 +36,18 @@ Publication: https://doi.org/10.1039/D4SC07320G
 Source Code: https://github.com/Ananikov-Lab/digitizing_molecular_complexity
 License: CC-BY-4.0
 Incorporation Date: '2026-01-30'
+Last Packaging Date: '2026-02-02'
+Release: v1.0.0
 S3: https://ersilia-models-zipped.s3.eu-central-1.amazonaws.com/eos96f4.zip
+DockerHub: https://hub.docker.com/r/ersiliaos/eos96f4
+Docker Architecture:
+  - AMD64
+  - ARM64
 Model Size: 916.0
 Environment Size: 1362.0
+Image Size: 2987.53
+Computational Performance 1: 30.06
+Computational Performance 2: 19.79
+Computational Performance 3: 20.38
+Computational Performance 4: 49.38
+Computational Performance 5: 181.46
