@@ -19,6 +19,8 @@ with open(input_file, "r") as f:
 
 
 def load_file(path: str):
+    path = os.path.abspath(path)
+    print(f"Loading file from {path}")
     with open(path, "rb") as f:
         data = pickle.load(f)
     return data
@@ -26,6 +28,7 @@ def load_file(path: str):
 
 def get_predictor() -> Predictor:
     dump = load_file(os.path.join(checkpoints_dir, "model.pkl"))[(0.7, 0.1, 0.2)]
+    print(dump.keys())
     ranker = dump["ranker"]
     scaler = dump["scaler"]
     return Predictor(ranker, scaler)
