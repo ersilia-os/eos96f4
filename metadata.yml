@@ -2,35 +2,37 @@ Identifier: eos96f4
 Slug: digitization-complexity
 Status: In progress
 Title: Digitization of molecular complexity
-Description: This model uses a learning-to-rank machine learning framework to quantify
-  molecular complexity in a supervised way. Based on Shapley value analysis, authors
-  were able to identify molecular characteristics that guide experts in assigning
-  molecular complexity, such as molecular weight or number of aromatic cycles. The
-  model was developed using a dataset of ca. 300k data points across diverse structures,
-  and it was applied to study trends in synthetic strategies, among other analyses.
+Description: This model uses a learning-to-rank machine learning framework to 
+  quantify molecular complexity in a supervised way. Based on Shapley value 
+  analysis, authors were able to identify molecular characteristics that guide 
+  experts in assigning molecular complexity, such as molecular weight or number 
+  of aromatic cycles. The model was developed using a dataset of ca. 300k data 
+  points across diverse structures, and it was applied to study trends in 
+  synthetic strategies, among other analyses.
 Deployment:
-- Local
+  - Local
 Source: Local
 Source Type: External
 Task: Annotation
 Subtask: Property calculation or prediction
 Input:
-- Compound
+  - Compound
 Input Dimension: 1
 Output:
-- Score
+  - Score
 Output Dimension: 1
 Output Consistency: Fixed
-Interpretation: The output score represents the predicted molecular complexity
+Interpretation: The output score represents the predicted molecular complexity 
   of the input compound, with higher scores indicating greater complexity.
 Tag:
-- Chemical synthesis
+  - Chemical synthesis
 Biomedical Area:
-- Any
+  - Any
 Target Organism:
-- Any
+  - Any
 Publication Type: Peer reviewed
 Publication Year: 2025
 Publication: https://doi.org/10.1039/D4SC07320G
 Source Code: https://github.com/Ananikov-Lab/digitizing_molecular_complexity
 License: CC-BY-4.0
+Incorporation Date: '2026-01-30'
