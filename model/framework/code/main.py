@@ -3,12 +3,16 @@ import os
 import csv
 import pickle
 
+input_file = os.path.abspath(sys.argv[1])
+output_file = os.path.abspath(sys.argv[2])
+
+cwd = os.getcwd()
+
 root = os.path.abspath(os.path.dirname(__file__))
 sys.path.append(root)
-from mc.analyzers import Predictor
+os.chdir(root)
 
-input_file = sys.argv[1]
-output_file = sys.argv[2]
+from mc.analyzers import Predictor
 
 checkpoints_dir = os.path.join(root, "..", "..", "checkpoints")
 
@@ -42,3 +46,5 @@ with open(output_file, "w") as f:
     writer.writerow(["molecular_complexity"])
     for mc in mc_list:
         writer.writerow([mc])
+
+os.chdir(cwd)
