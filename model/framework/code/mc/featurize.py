@@ -1,4 +1,5 @@
 import os
+import numpy as np
 import pandas as pd
 from rdkit import Chem
 from rdkit.Chem import Descriptors, rdMolDescriptors
@@ -11,6 +12,7 @@ from mc.scscorer.scscore.standalone_model_numpy import SCScorer
 
 
 def _get_scorer():
+    """Initializes and restores the SCScorer model."""
     model = SCScorer()
     model.restore(
         os.path.join(
@@ -26,38 +28,73 @@ def _get_scorer():
 
 def featurize(data: pd.DataFrame) -> pd.DataFrame:
     """
-    :param data: filtered dataset
-    :return: dataset with molecular and structural features
+    Calculates molecular features. Returns NaN if a molecule cannot be processed 
+    to prevent runtime crashes.
     """
-    data["weight"] = data["mol"].map(Descriptors.ExactMolWt)
-    data["num_of_atoms"] = data["mol"].apply(lambda x: x.GetNumAtoms())
-    data["tpsa"] = data["mol"].apply(lambda x: Descriptors.TPSA(x))
-    data["num_heteroatoms"] = (
-        data["mol"]
-        .apply(lambda x: Descriptors.NumHeteroatoms(x))
-        .apply(lambda x: float(x))
+    
+    def safe_calc(mol, func, is_smiles=False):
+        """
+        Helper to safely calculate descriptors. 
+        Ensures RingInfo is initialized to avoid RDKit Pre-condition Violations.
+        """
+        try:
+            if is_smiles:
+                if pd.isna(mol) or mol is None:
+                    return np.nan
+                # For functions taking SMILES strings
+                return func(mol)
+            
+            if mol is None:
+                return np.nan
+            
+            # Force ring initialization to prevent 'RingInfo not initialized' error
+            Chem.GetSymmSSSR(mol)
+            return func(mol)
+        except Exception:
+            return np.nan
+
+    # Molecule-based descriptors
+    data["weight"] = data["mol"].apply(lambda x: safe_calc(x, Descriptors.ExactMolWt))
+    data["num_of_atoms"] = data["mol"].apply(lambda x: x.GetNumAtoms() if x else np.nan)
+    data["tpsa"] = data["mol"].apply(lambda x: safe_calc(x, Descriptors.TPSA))
+    data["num_heteroatoms"] = data["mol"].apply(
+        lambda x: safe_calc(x, lambda m: float(Descriptors.NumHeteroatoms(m)))
     )
-    data["spiro"] = data["mol"].map(rdMolDescriptors.CalcNumSpiroAtoms)
-    data["rotb"] = data["mol"].map(rdMolDescriptors.CalcNumRotatableBonds)
-    data["aliph_cycles"] = data["mol"].map(rdMolDescriptors.CalcNumAliphaticCarbocycles)
-    data["arom_cycles"] = data["mol"].map(rdMolDescriptors.CalcNumAromaticCarbocycles)
-    data["aliph_heterocycles"] = data["mol"].map(
-        rdMolDescriptors.CalcNumAliphaticHeterocycles
+    
+    # Structural descriptors
+    data["spiro"] = data["mol"].apply(lambda x: safe_calc(x, rdMolDescriptors.CalcNumSpiroAtoms))
+    data["rotb"] = data["mol"].apply(lambda x: safe_calc(x, rdMolDescriptors.CalcNumRotatableBonds))
+    data["aliph_cycles"] = data["mol"].apply(
+        lambda x: safe_calc(x, rdMolDescriptors.CalcNumAliphaticCarbocycles)
     )
-    data["arom_heterocycles"] = data["mol"].map(
-        rdMolDescriptors.CalcNumAromaticHeterocycles
+    data["arom_cycles"] = data["mol"].apply(
+        lambda x: safe_calc(x, rdMolDescriptors.CalcNumAromaticCarbocycles)
     )
-    data["bridge_atoms"] = data["mol"].map(rdMolDescriptors.CalcNumBridgeheadAtoms)
+    data["aliph_heterocycles"] = data["mol"].apply(
+        lambda x: safe_calc(x, rdMolDescriptors.CalcNumAliphaticHeterocycles)
+    )
+    data["arom_heterocycles"] = data["mol"].apply(
+        lambda x: safe_calc(x, rdMolDescriptors.CalcNumAromaticHeterocycles)
+    )
+    data["bridge_atoms"] = data["mol"].apply(
+        lambda x: safe_calc(x, rdMolDescriptors.CalcNumBridgeheadAtoms)
+    )
+
+    # Stereochemistry
+    # Note: Using Chem.MolFromSmiles(x) here as in original code, but wrapped safely
     data["atom_stereo_centers"] = data["smiles"].apply(
-        lambda x: rdMolDescriptors.CalcNumAtomStereoCenters(Chem.MolFromSmiles(x))
+        lambda x: safe_calc(x, lambda s: rdMolDescriptors.CalcNumAtomStereoCenters(Chem.MolFromSmiles(s)), is_smiles=True)
     )
+    
     opts = StereoEnumerationOptions(onlyUnassigned=False, unique=True)
-    data["num_of_stereoisomers"] = (
-        data["mol"]
-        .apply(lambda x: GetStereoisomerCount(x, options=opts))
-        .apply(lambda x: float(x))
+    data["num_of_stereoisomers"] = data["mol"].apply(
+        lambda x: safe_calc(x, lambda m: float(GetStereoisomerCount(m, options=opts)))
     )
+
+    # SCScore
     scorer = _get_scorer()
-    data["scscore"] = data["smiles"].apply(lambda x: scorer.get_score_from_smi(x)[-1])
+    data["scscore"] = data["smiles"].apply(
+        lambda x: safe_calc(x, lambda s: scorer.get_score_from_smi(s)[-1], is_smiles=True)
+    )
 
     return data

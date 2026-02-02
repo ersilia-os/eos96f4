@@ -29,7 +29,7 @@ def load_file(path: str):
         data = pickle.load(f)
     return data
 
-
+print(smiles_list)
 def get_predictor() -> Predictor:
     dump = load_file(os.path.join(checkpoints_dir, "model.pkl"))[(0.7, 0.1, 0.2)]
     print(dump.keys())
