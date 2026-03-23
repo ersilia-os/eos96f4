@@ -39,7 +39,15 @@ def get_predictor() -> Predictor:
 
 
 predictor = get_predictor()
-mc_list = predictor.predict(smiles_list)
+
+# Run predictor per molecule with try/except safety net
+mc_list = []
+for smi in smiles_list:
+    try:
+        result = predictor.predict([smi])
+        mc_list.append(result[0])
+    except Exception:
+        mc_list.append("")
 
 with open(output_file, "w") as f:
     writer = csv.writer(f)
