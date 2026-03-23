@@ -2,7 +2,7 @@
 
 This model uses a learning-to-rank machine learning framework to quantify molecular complexity in a supervised way. Based on Shapley value analysis, authors were able to identify molecular characteristics that guide experts in assigning molecular complexity, such as molecular weight or number of aromatic cycles. The model was developed using a dataset of ca. 300k data points across diverse structures, and it was applied to study trends in synthetic strategies, among other analyses.
 
-This model was incorporated on 2026-01-30.Last packaged on 2026-02-02.
+This model was incorporated on 2026-01-30.Last packaged on 2026-03-23.
 
 ## Information
 ### Identifiers
@@ -35,18 +35,18 @@ Below are the **Output Columns** of the model:
 - **Source:** `Local`
 - **Source Type:** `External`
 - **DockerHub**: [https://hub.docker.com/r/ersiliaos/eos96f4](https://hub.docker.com/r/ersiliaos/eos96f4)
-- **Docker Architecture:** `AMD64`, `ARM64`
+- **Docker Architecture:** `AMD64`
 - **S3 Storage**: [https://ersilia-models-zipped.s3.eu-central-1.amazonaws.com/eos96f4.zip](https://ersilia-models-zipped.s3.eu-central-1.amazonaws.com/eos96f4.zip)
 
 ### Resource Consumption
 - **Model Size (Mb):** `916`
 - **Environment Size (Mb):** `1371`
-- **Image Size (Mb):** `2987.53`
+- **Image Size (Mb):** `2985.59`
 
 **Computational Performance (seconds):**
-- 10 inputs: `30.06`
-- 100 inputs: `20.38`
-- 10000 inputs: `181.46`
+- 10 inputs: `37`
+- 100 inputs: `102.47`
+- 10000 inputs: `-1`
 
 ### References
 - **Source Code**: [https://github.com/Ananikov-Lab/digitizing_molecular_complexity](https://github.com/Ananikov-Lab/digitizing_molecular_complexity)
