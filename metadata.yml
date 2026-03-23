@@ -37,7 +37,7 @@ Source Code: https://github.com/Ananikov-Lab/digitizing_molecular_complexity
 License: CC-BY-4.0
 Incorporation Date: '2026-01-30'
 Last Packaging Date: '2026-03-23'
-Release: v1.0.0
+Release: v1.0.1
 S3: https://ersilia-models-zipped.s3.eu-central-1.amazonaws.com/eos96f4.zip
 DockerHub: https://hub.docker.com/r/ersiliaos/eos96f4
 Docker Architecture: AMD64
