@@ -1,0 +1,8 @@
+python: "3.12"
+commands:
+    - ["pip", "scikit-learn", "1.6.1"]
+    - ["pip", "rdkit", "2024.09.5"]
+    - ["pip", "datamol", "0.12.5"]
+    - ["pip", "catboost", "1.2.7"]
+    - ["pip", "pyarrow", "19.0.1"]
+    - ["pip", "pandas", "2.2.3"]
