@@ -1,6 +1,6 @@
 # Digitization of molecular complexity
 
-This model uses a learning-to-rank machine learning framework to quantify molecular complexity in a supervised way. Based on Shapley value analysis, authors were able to identify molecular characteristics that guide experts in assigning molecular complexity, such as molecular weight or number of aromatic cycles. The model was developed using a dataset of ca. 300k data points across diverse structures, and it was applied to study trends in synthetic strategies, among other analyses.
+Quantifies how complex a molecule appears to an experienced chemist, learned from expert judgements rather than defined by a formula. The authors framed this as learning to rank, training on pairwise complexity comparisons, and used Shapley analysis to identify which structural characteristics drive the assessments, among them ring fusion, stereocentres and unusual heteroatom arrangements. Because the target is human perception, the score reflects the intuitions of the chemists who supplied the rankings.
 
 This model was incorporated on 2026-01-30.Last packaged on 2026-03-23.
 
@@ -23,7 +23,7 @@ This model was incorporated on 2026-01-30.Last packaged on 2026-03-23.
 ### Output
 - **Output Dimension:** `1`
 - **Output Consistency:** `Fixed`
-- **Interpretation:** The output score represents the predicted molecular complexity of the input compound, with higher scores indicating greater complexity.
+- **Interpretation:** Molecular complexity score where higher values indicate a more complex compound.
 
 Below are the **Output Columns** of the model:
 | Name | Type | Direction | Description |
