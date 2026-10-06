@@ -1,4 +1,5 @@
 import os
+from functools import lru_cache
 import numpy as np
 import pandas as pd
 from rdkit import Chem
@@ -11,6 +12,11 @@ from rdkit.Chem.EnumerateStereoisomers import (
 from mc.scscorer.scscore.standalone_model_numpy import SCScorer
 
 
+# OPTIMIZATION: load the SCScore model once and reuse it.
+# featurize() is called once per molecule (main.py predicts one molecule at a time),
+# and it used to reload this model from its 9 MB .json.gz file on every call.
+# The model is read-only, so reusing it gives the same scores.
+@lru_cache(maxsize=1)
 def _get_scorer():
     """Initializes and restores the SCScorer model."""
     model = SCScorer()
