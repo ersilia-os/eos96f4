@@ -2,7 +2,7 @@
 
 Quantifies how complex a molecule appears to an experienced chemist, learned from expert judgements rather than defined by a formula. The authors framed this as learning to rank, training on pairwise complexity comparisons, and used Shapley analysis to identify which structural characteristics drive the assessments, among them ring fusion, stereocentres and unusual heteroatom arrangements. Because the target is human perception, the score reflects the intuitions of the chemists who supplied the rankings.
 
-This model was incorporated on 2026-01-30.Last packaged on 2026-03-23.
+This model was incorporated on 2026-01-30.Last packaged on 2026-10-06.
 
 ## Information
 ### Identifiers
@@ -35,18 +35,18 @@ Below are the **Output Columns** of the model:
 - **Source:** `Local`
 - **Source Type:** `External`
 - **DockerHub**: [https://hub.docker.com/r/ersiliaos/eos96f4](https://hub.docker.com/r/ersiliaos/eos96f4)
-- **Docker Architecture:** `AMD64`
+- **Docker Architecture:** `AMD64`, `ARM64`
 - **S3 Storage**: [https://ersilia-models-zipped.s3.eu-central-1.amazonaws.com/eos96f4.zip](https://ersilia-models-zipped.s3.eu-central-1.amazonaws.com/eos96f4.zip)
 
 ### Resource Consumption
 - **Model Size (Mb):** `916`
 - **Environment Size (Mb):** `1377`
-- **Image Size (Mb):** `2985.59`
+- **Image Size (Mb):** `3002.28`
 
 **Computational Performance (seconds):**
-- 10 inputs: `37`
-- 100 inputs: `102.47`
-- 10000 inputs: `-1`
+- 10 inputs: `29.36`
+- 100 inputs: `20.49`
+- 10000 inputs: `236.55`
 
 ### References
 - **Source Code**: [https://github.com/Ananikov-Lab/digitizing_molecular_complexity](https://github.com/Ananikov-Lab/digitizing_molecular_complexity)
