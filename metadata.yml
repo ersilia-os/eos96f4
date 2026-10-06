@@ -37,16 +37,18 @@ Source Code: https://github.com/Ananikov-Lab/digitizing_molecular_complexity
 License: CC-BY-4.0
 Contributor: miquelduranfrigola
 Incorporation Date: '2026-01-30'
-Last Packaging Date: '2026-03-23'
+Last Packaging Date: '2026-10-06'
 Release: v1.0.1
 S3: https://ersilia-models-zipped.s3.eu-central-1.amazonaws.com/eos96f4.zip
 DockerHub: https://hub.docker.com/r/ersiliaos/eos96f4
-Docker Architecture: AMD64
+Docker Architecture:
+  - AMD64
+  - ARM64
 Model Size: 916.0
 Environment Size: 1377.0
-Image Size: 2985.59
-Computational Performance 1: 37.0
-Computational Performance 2: 34.9
-Computational Performance 3: 102.47
-Computational Performance 4: 823.35
-Computational Performance 5: -1.0
+Image Size: 3002.28
+Computational Performance 1: 29.36
+Computational Performance 2: 21.31
+Computational Performance 3: 20.49
+Computational Performance 4: 60.5
+Computational Performance 5: 236.55
