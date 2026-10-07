@@ -2,13 +2,14 @@ Identifier: eos96f4
 Slug: digitization-complexity
 Status: Ready
 Title: Digitization of molecular complexity
-Description: Quantifies how complex a molecule appears to an experienced 
-  chemist, learned from expert judgements rather than defined by a formula. The 
-  authors framed this as learning to rank, training on pairwise complexity 
-  comparisons, and used Shapley analysis to identify which structural 
-  characteristics drive the assessments, among them ring fusion, stereocentres 
-  and unusual heteroatom arrangements. Because the target is human perception, 
-  the score reflects the intuitions of the chemists who supplied the rankings.
+Description: Quantifies how complex a molecule looks to an experienced chemist, learned
+  from expert judgement rather than fixed by a formula. Fifty chemists ranked sets
+  of structures in a crowdsourcing exercise with active learning, yielding roughly
+  300,000 labels used to train a CatBoost learning-to-rank model that reaches 77.5%
+  pairwise accuracy. Shapley analysis showed molecular weight, the number of aromatic
+  cycles and topological polar surface area to be the strongest drivers of expert
+  decisions. The score tracks human perception, so it inherits the intuitions of the
+  chemists who supplied it.
 Deployment:
   - Local
 Source: Local
