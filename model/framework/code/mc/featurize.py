@@ -22,9 +22,12 @@ def _get_scorer():
     model = SCScorer()
     model.restore(
         os.path.join(
-            "mc",
+            os.path.dirname(os.path.abspath(__file__)),
+            "..",
+            "..",
+            "..",
+            "checkpoints",
             "scscorer",
-            "models",
             "full_reaxys_model_2048bool",
             "model.ckpt-10654.as_numpy.json.gz",
         ),
