@@ -3,7 +3,7 @@
 Quantifies how complex a molecule looks to an experienced chemist, learned from expert judgement rather than fixed by a formula. Fifty chemists ranked sets of structures in a crowdsourcing exercise with active learning, yielding roughly 300,000 labels used to train a CatBoost learning-to-rank model that reaches 77.5% pairwise accuracy. Shapley analysis showed molecular weight, the number of aromatic cycles and topological polar surface area to be the strongest drivers of expert decisions. The score tracks human perception, so it inherits the intuitions of the chemists who supplied it.
 
 This model was incorporated on 2026-01-30.
-Last packaged on 2026-10-06.
+Last packaged on 2026-11-12.
 
 ## Information
 ### Identifiers
@@ -42,12 +42,12 @@ Below are the **Output Columns** of the model:
 ### Resource Consumption
 - **Model Size (Mb):** `421`
 - **Environment Size (Mb):** `1377`
-- **Image Size (Mb):** `3002.28`
+- **Image Size (Mb):** `462.14`
 
 **Computational Performance (seconds):**
-- 10 inputs: `29.36`
-- 100 inputs: `20.49`
-- 10000 inputs: `236.55`
+- 10 inputs: `31.97`
+- 100 inputs: `20.2`
+- 10000 inputs: `148.67`
 
 ### References
 - **Source Code**: [https://github.com/Ananikov-Lab/digitizing_molecular_complexity](https://github.com/Ananikov-Lab/digitizing_molecular_complexity)
