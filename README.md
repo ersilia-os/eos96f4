@@ -2,7 +2,8 @@
 
 Quantifies how complex a molecule looks to an experienced chemist, learned from expert judgement rather than fixed by a formula. Fifty chemists ranked sets of structures in a crowdsourcing exercise with active learning, yielding roughly 300,000 labels used to train a CatBoost learning-to-rank model that reaches 77.5% pairwise accuracy. Shapley analysis showed molecular weight, the number of aromatic cycles and topological polar surface area to be the strongest drivers of expert decisions. The score tracks human perception, so it inherits the intuitions of the chemists who supplied it.
 
-This model was incorporated on 2026-01-30.Last packaged on 2026-10-06.
+This model was incorporated on 2026-01-30.
+Last packaged on 2026-10-06.
 
 ## Information
 ### Identifiers
