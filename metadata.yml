@@ -45,6 +45,7 @@ DockerHub: https://hub.docker.com/r/ersiliaos/eos96f4
 Docker Architecture:
   - AMD64
   - ARM64
+Apptainer: https://models-sif.s3.eu-north-1.amazonaws.com/eos96f4_v1.sif
 Model Size: 421.0
 Environment Size: 1377.0
 Image Size: 462.14
